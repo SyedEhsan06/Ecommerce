@@ -1,113 +1,163 @@
-import Image from 'next/image'
+"use client"
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from './Redux/productSlice';
+import { add } from './Redux/CartSlice';
+import { fetchProductPage } from './Redux/productPageSlice';
+import Image from 'next/image'; 
+import { useRouter } from 'next/navigation';
+import { fetchUser } from './Redux/user';
+const Page = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const router = useRouter()
+  
+  const handeleIconAdd = (e,qty) => {
+    dispatch(add({x:e,qty:qty}));
+    toast.success('Added To Cart🤩', {
+      position: 'top-right',
+      autoClose: 200,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: 'colored',
+    });
+  };
 
-export default function Home() {
+  const handleBuyNow = (index) => {
+    dispatch(fetchProductPage(index));
+  };
+
+  useEffect(() => {
+    if(!localStorage.getItem('token')){
+      router.push('./Login')
+    }
+    else{
+      dispatch(fetchProducts());
+      dispatch(fetchUser())
+
+    }
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
+    <>
+    <div className='container' datatheme='cupcake'>
+    <div id="main" >
+      <div className="main bg-forest-200 w-full h-full flex gap-3">
+        <div className="left-section w-1/2 bg-forest-50 m-4 rounded-xl overflow-hidden shadow-lg"style={{height:'80vh',border:'2px solid #dca54c'}}>
+          <Link href="./Mens">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              className="imgMain h-full w-full p-1 object-cover rounded-xl hover:scale-110 transition-all duration-500"
+              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              alt=""
+              width={500} // Set the width you want for the image
+              height={400} // Set the height you want for the image
             />
-          </a>
+          </Link>
+        </div>
+        <div className="right-section  w-3/7 flex flex-wrap"style={{height:'77.5vh'}}>
+          <div style={{border:'2px solid #dca54c'}} className="right-upper bg-forest-50 w-full h-1/2 mt-4 mb-0 overflow-hidden shadow-lg rounded-xl">
+            <Link href="./Electronics">
+              <Image
+                className="imgMain h-full w-full p-1 object-cover rounded-xl hover:scale-110 transition-all duration-500"
+                src="https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1626&q=80"
+
+                alt=""
+                width={500}
+                height={400}
+              />
+            </Link>
+          </div>
+          <div style={{border:'2px solid #dca54c'}} className="right-lower bg-forest-50 w-3/7 h-1/2 m-4 rounded-xl overflow-hidden shadow-lg" >
+            <Link href="./Womens">
+              <Image
+                className="imgMain h-full w-full p-1 object-cover rounded-xl hover:scale-110 transition-all duration-500"
+                src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1420&q=80"
+                alt=""
+                width={500}
+                height={400}
+              />
+            </Link>
+          </div>
+          <div style={{border:'2px solid #dca54c'}} className="right-lower-2  bg-forest-50 w-3/7 h-1/2 m-4 rounded-xl overflow-hidden shadow-lg">
+            <Link href="./Electronics">
+              <Image
+                className="imgMain h-full w-full p-1 object-cover rounded-xl hover:scale-110 transition-all duration-500"
+                src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1412&q=80"
+                alt=""
+                width={500}
+                height={400}
+              />
+            </Link>
+          </div>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="line bg-forest-50 w-full h-1"></div>
+      <h1
+        className="text-center text-forest-900 font-bold text-2xl cursor-pointer"
+        onClick={() => {
+          dispatch(fetchProducts());
+        }}
+      >
+        {state.product.isLoading ? 'Fetching Products' : 'Our Products'}
+      </h1>
+      <div className="line bg-forest-50 w-full h-1"></div>
+      <div className="page2">
+        <div className="main2 bg-forest-50 w-full h-96 flex justify-evenly flex-wrap">
+          <ToastContainer />
+          <div className="flex flex-wrap -mx-4">
+            {state.product.data &&
+              state.product.data.map((e, index) => (
+                <div className="w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-8" key={index}>
+                  <div className="card bg-forest-50 shadow-xl hover:bg-slate-600 hover:transition-all ease hover:scale-105">
+                    <figure style={{mixBlendMode:"multiply",}}>
+                      <Image
+                      
+                        className="w-full h-56 object-contain"
+                        src={e.image}
+                        alt="Shoes"
+                        width={500}
+                        height={400}
+                      />
+                    </figure>
+                    <div className="card-body">
+                      <h2 className="card-title">{e.title.slice(0, 30) + '...'}</h2>
+                      <p>{e.description.slice(0, 60) + '...'}</p>
+                      <div className="card-actions justify-around">
+                        <i
+                          onClick={() => {
+                            handeleIconAdd(e,1);
+                          }}
+                          className="siu fas fa-shopping-cart hover:scale-110 hover:text-forest-600 mt-3 "
+                        ></i>
+                        <Link href="/productPage">
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => {
+                              handleBuyNow(index);
+                            }}
+                          >
+                            Buy Now
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
       </div>
-    </main>
-  )
-}
+      </div>
+    </>
+  );
+};
+
+export default Page;
