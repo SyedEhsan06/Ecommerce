@@ -8,7 +8,8 @@ app.use(express.json())
 connectToMongo();
 
 app.use(cors({
-  origin:"http://localhost:3000"
+  origin:"http://localhost:3000",
+  origin:"https://ecommerce-swart-sigma.vercel.app"
 }))
 app.use('/api/auth',require('./routes/auth'))
 app.get('/', (req, res) => {
