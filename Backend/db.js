@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://127.0.0.1:27017/Ecommerce'
-
+require('dotenv').config()
+const mongoUri = process.env.DB_URL
 const connectToMongo = async()=>{
     mongoose.connect(mongoUri,()=>{
         console.log('Connected To Mongo Db Successfully')
