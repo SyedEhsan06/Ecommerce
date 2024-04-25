@@ -33,7 +33,9 @@ const Page = () => {
     dispatch(fetchProductPage(index));
   };
 
- 
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
   return (
     <>
