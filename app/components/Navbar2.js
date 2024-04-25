@@ -89,7 +89,7 @@ const Navbar = () => {
                 <li>
                   <Link href="./">Settings</Link>
                 </li>
-                <li className="w-full mt-2" onClick={handleLogout}>
+                <li className="w-full mt-2" >
                   <button className="p-3 btn btn-warning rounded-full w-full text-center hover:bg-red-600">
                    <span>LogOut</span>
                   </button>
