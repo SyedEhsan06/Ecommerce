@@ -37,6 +37,11 @@ const page = () => {
   }
 
  
+  useEffect(() => {
+
+    dispatch(fetchTechPage("electronics"))
+  
+}, []);
      
   return (
   

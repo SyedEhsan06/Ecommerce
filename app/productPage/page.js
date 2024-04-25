@@ -11,7 +11,11 @@ const page = () => {
   const dispatch = useDispatch();
   const router = useRouter()
 
-
+  useEffect(() => {
+  
+      dispatch(fetchProductPage());
+    
+  }, []);
   let p = details.productPage;
   let x = p.data;
   const [qty, setqty] = useState(1);

@@ -33,7 +33,12 @@ const router = useRouter()
 
     dispatch(fetchProductPage(e.id-1))
   }
-  
+  useEffect(() => {
+ 
+      dispatch(fetchTechPage("men's%20clothing"))
+
+    
+  }, []);
   
      
   return (
