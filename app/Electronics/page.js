@@ -36,14 +36,7 @@ const page = () => {
     dispatch(fetchProductPage(e.id-1))
   }
 
-  useEffect(() => {
-    if(!localStorage.getItem('token')){
-      router.push('./Login')
-    }
-    else{
-      dispatch(fetchTechPage("electronics"))
-    }
-  }, []);
+ 
      
   return (
   
