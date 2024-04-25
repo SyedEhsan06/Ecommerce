@@ -11,13 +11,7 @@ const page = () => {
   const dispatch = useDispatch();
   const router = useRouter()
 
-  useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      router.push("./Login");
-    } else {
-      dispatch(fetchProductPage());
-    }
-  }, []);
+
   let p = details.productPage;
   let x = p.data;
   const [qty, setqty] = useState(1);

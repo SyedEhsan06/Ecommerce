@@ -23,11 +23,7 @@ const Page = () => {
       theme: "colored",
       });
   };
-  useEffect(() => {
-    if(!localStorage.getItem('token')){
-      router.push('./Login')
-    }
-  }, []);
+
   const priceArray = items.map((e,index)=> e.price  )
 const increase = (e,index)=>{
   dispatch(add({x:e}));

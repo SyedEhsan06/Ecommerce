@@ -17,51 +17,9 @@ const Navbar = () => {
   let totalPrice = arr[0].reduce((a, b) => a + b, 0);
   let qty = items.length;
 
-  const handleLogout = () => {
-   setTimeout(() => {
-    localStorage.removeItem("token");
-    router.push("./Login");
-    setUserName('')
-   }, 1300);
-    toast.warning('LoggedOut', {
-      position: 'top-right',
-      autoClose: 1000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: 'colored',
-    });
-  };
+ 
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const authToken = localStorage.getItem("token");
-
-      try {
-        // Fetch user data with the token
-        const response = await fetch('http://localhost:5000/api/auth/getuser', {
-          method: 'GET',
-          headers: {
-            'auth-token': authToken,
-          },
-        });
-
-        if (response.ok) {
-          const userData = await response.json();
-          setUserName(userData.name); 
-        } else {
-          console.error('Failed to fetch user data');
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserData();
-  }, ); 
-console.log(userName)
+  
   return (
     <>
       {Routepath !== "/Login" && Routepath !== "/Signup" ? (
